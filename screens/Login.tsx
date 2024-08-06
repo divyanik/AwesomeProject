@@ -6,7 +6,7 @@ function Login(): React.JSX.Element {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const login = async () => {
+  const handleLogin = async () => {
     try {
       //http://localhost:3000/api/login
       console.warn(username, password);
@@ -26,7 +26,6 @@ function Login(): React.JSX.Element {
 
       if (response.ok) {
         Alert.alert('Success', data.message);
-        // Handle successful login, e.g., navigate to another screen or store the token
       } else {
         Alert.alert('Error', data.message);
       }
@@ -57,7 +56,7 @@ function Login(): React.JSX.Element {
           placeholder="Enter your password here"
           secureTextEntry={true}
         />
-        <Button title="Login" onPress={login} />
+        <Button title="Login" onPress={handleLogin} />
       </View>
     </ImageBackground>
   );
