@@ -3,9 +3,9 @@ import { View, TextInput, Text, TouchableOpacity, StyleSheet, Alert } from 'reac
 
 const Registration: React.FC = () => {
 
-  const [userData, setData] = useState({
-    name: '', email: '', password: ''
-  });
+  // const [userData, setData] = useState({
+  //   name: '', email: '', password: ''
+  // });
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -17,7 +17,6 @@ const Registration: React.FC = () => {
     }
     
     try {
-        console.warn(name, email, password);
         let response = await fetch(
             'http://192.168.2.135:3001/registration', {
               method: 'POST',
@@ -32,13 +31,12 @@ const Registration: React.FC = () => {
           });
           let responseText = await response.text();
           if (response.status >= 200 && response.status < 300){
-            Alert.alert('Server response', responseText)
-        
+            Alert.alert('User registered successfully.')
+           // navigation.navigate('Login');  // uncomment once implemented.
           }
           else {
             let error = responseText;
             throw error
-            //Alert.alert('Login', error)
           }
       } catch (error) {
         console.error('Error logging in:', error);

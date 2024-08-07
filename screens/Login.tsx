@@ -1,28 +1,31 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { View, TextInput, Button, ImageBackground, StyleSheet, Alert } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 function Login(): React.JSX.Element {
-  const [username, setUsername] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const handleLogin = async () => {
     try {
-      //http://localhost:3000/api/login
-      console.warn(username, password);
-      const response = await fetch('https://dummyjson.com/auth/login', {
+      console.warn(email, password);
+      const response = await fetch('http://192.168.2.135:3001/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username: username, //'emilys'
-          password: password, // 'emilyspass'
-          expiresInMins: 30
+          email: email, 
+          password: password
         }),
       });
 
       const data = await response.json();
+      console.log(data);
 
       if (response.ok) {
         Alert.alert('Success', data.message);
@@ -44,10 +47,10 @@ function Login(): React.JSX.Element {
       <View style={styles.overlay}>
         <TextInput
           style={styles.input}
-          onChangeText={setUsername}
-          value={username}
-          placeholder="Enter your username here"
-          keyboardType="numeric"
+          onChangeText={setEmail}
+          value={email}
+          placeholder="Enter your email here"
+          keyboardType="email-address"
         />
         <TextInput
           style={styles.input}
