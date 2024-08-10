@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './screens/Login';
 import RegisterationScreen from './screens/Registration';
+import HomeScreen from './screens/Home';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,8 +28,6 @@ function MainScreen({navigation}: {navigation: any}) {
   );
 }
 
-
-
 function App() {
   return (
     <NavigationContainer>
@@ -36,6 +35,7 @@ function App() {
         <Stack.Screen name="Main" component={MainScreen} options={{title: 'Mobile Application'}}/>
         <Stack.Screen name="Login" component={LoginScreen} options={{title: 'Login'}}/>
         <Stack.Screen name="Registration" component={RegisterationScreen} options={{title: 'Registration'}}/>
+        <Stack.Screen name="Home" component={HomeScreen} options={{title: 'Home'}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

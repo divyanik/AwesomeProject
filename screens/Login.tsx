@@ -1,18 +1,16 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { View, TextInput, Button, ImageBackground, StyleSheet, Alert } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
-function Login(): React.JSX.Element {
+const Login = ({navigation}: {navigation: any}) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const handleLogin = async () => {
     try {
-      console.warn(email, password);
+      console.log('Login in process...');
       const response = await fetch('http://192.168.2.135:3001/login', {
         method: 'POST',
         headers: {
@@ -28,13 +26,14 @@ function Login(): React.JSX.Element {
       console.log(data);
 
       if (response.ok) {
-        Alert.alert('Success', data.message);
+        navigation.navigate('Welcome', { userName: data.userName });
       } else {
-        Alert.alert('Error', data.message);
+        console.log('Error while login:', data.message, response)
+        Alert.alert('Invalid credentials');
       }
     } catch (error) {
       console.error('Error logging in:', error);
-      Alert.alert('Error', 'An error occurred during login');
+      Alert.alert('Error occured. Try Again!');
     }
   };
 
