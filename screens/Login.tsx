@@ -26,7 +26,7 @@ const Login = ({navigation}: {navigation: any}) => {
       console.log(data);
 
       if (response.ok) {
-        navigation.navigate('Welcome', { userName: data.userName });
+        navigation.navigate('Home', { userName: data.userName });
       } else {
         console.log('Error while login:', data.message, response)
         Alert.alert('Invalid credentials');
